@@ -1,7 +1,7 @@
-# blackjack
-Practice project based on BlackJack
+# RetroArcade
+Test text
 
 Project Team
-* Owen (owner)
-* Alice (collaborator)
-* Bob (collaborator)
+* Aaron (owner)
+* Ibrahim (collaborator)
+* James (collaborator)
