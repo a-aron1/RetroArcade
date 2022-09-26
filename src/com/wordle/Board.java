@@ -1,15 +1,9 @@
 package com.wordle;
 
-/*
- *
- */
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Board {
-    // statics
-
     // fields
     private int rowCount;
     private int colCount;

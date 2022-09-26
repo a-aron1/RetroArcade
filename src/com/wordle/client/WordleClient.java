@@ -1,14 +1,8 @@
 package com.wordle.client;
 
-/*
- *
- */
-
 import com.wordle.Board;
 import com.wordle.Display;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;

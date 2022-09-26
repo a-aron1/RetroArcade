@@ -1,9 +1,5 @@
 package com.wordle;
 
-/*
- * Screen / display method
- */
-
 public class Display {
     private static String title =
             "WELCOME!! TO\nWORDLE CLONE FOR JAVA\nBrought To You By\nYour Favorite Developers at\nRetroArcade";
