@@ -4,39 +4,36 @@ package com.wordle;
  *
  */
 
-import com.wordle.LangCheck;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Board {
     // statics
 
-
     // fields
     private int rowCount;
     private int colCount;
     private ArrayList<String> guesses = new ArrayList<String>();
     private String answer;
-    private LangCheck wordCheck;
+    private WordCheck wordCheck;
 
     // Ctors
     public Board(String filePath) throws IOException {
         this.rowCount = 6;
         this.colCount = 5;
-        this.wordCheck = new LangCheck(filePath, 5);
+        this.wordCheck = new WordCheck(filePath, 5);
     }
 
     public Board(String filePath, int size) throws IOException {
         this.rowCount = size;
         this.colCount = 5;
-        this.wordCheck = new LangCheck(filePath, 5);
+        this.wordCheck = new WordCheck(filePath, 5);
     }
 
     public Board(String filePath, int size, int length) throws IOException {
         this.rowCount = size;
         this.colCount = length;
-        this.wordCheck = new LangCheck(filePath, length);
+        this.wordCheck = new WordCheck(filePath, length);
         this.answer = wordCheck.fetchRandomWord();
     }
 
@@ -76,4 +73,11 @@ public class Board {
     public int getBoardWidth() { // from getColCount
         return colCount;
     }
+
+    // toString() TODO: change to "gets"
+//    @Override
+//    public String toString() {
+//        System.out.printf("Board: rowCount=%s, colCount=%s, guesses=%s, answer=%s, wordCheck=%s",
+//                rowCount, colCount, guesses, answer, wordCheck);
+//    }
 }

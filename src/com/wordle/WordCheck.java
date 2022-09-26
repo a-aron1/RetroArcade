@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class LangCheck {
+public class WordCheck {
     private List<String> words;
 
     // Ctors
-    public LangCheck(String filePath) throws IOException {
+    public WordCheck(String filePath) throws IOException {
         this.words = Files.readAllLines(Paths.get(filePath)).stream()
                 .filter(word -> !(word.contains(".")) || word.contains("-") || word.contains(",") || word.contains("'"))
                 .map(word -> word.toLowerCase())
                 .collect(Collectors.toList());
     }
 
-    public LangCheck(String filePath, int length) throws IOException {
+    public WordCheck(String filePath, int length) throws IOException {
         this.words = Files.readAllLines(Paths.get(filePath)).stream()
                 .filter(word -> word.length() == length
                         && !(word.contains(".")) || word.contains("-") || word.contains(",") || word.contains("'"))
