@@ -4,7 +4,7 @@ package com.wordle;
  * Ansi background colors
  */
 
-enum Colors {
+enum Color {
     BLACK("\033[0;100m"), // , "\u001B[30m"),
     RED("\033[0;101m"), // , "\u001B[31m"),
     GREEN("\033[0;102m"), // , "\u001B[32m"),
@@ -14,10 +14,11 @@ enum Colors {
     CYAN("\033[0;106m"), // , "\u001B[36m"),
     WHITE("\033[0;107m");// , "\u001B[37m");
 
-    private final String ansi_background;
-    private final static String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
-    private Colors(String ansi_background) {
+    public final String ansi_background;
+
+    private Color(String ansi_background) {
         this.ansi_background = ansi_background;
     }
 }
