@@ -4,6 +4,8 @@ package com.wordle;
  *
  */
 
-class User {
+class Wordle {
+
+    // TODO
 
 }

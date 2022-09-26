@@ -4,6 +4,6 @@ package com.wordle;
  *
  */
 
-class User {
+class Display {
 
 }
