@@ -1,4 +1,4 @@
-package com.wordle;
+package com.wordle.client;
 
 /*
  *

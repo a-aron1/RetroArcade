@@ -1,14 +1,13 @@
 package com.wordle;
 
 /*
- * Wrapper class to initialize list of words from text file
+ * Wrapper class to initialize list of words from text file using stream()
  */
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 import java.util.stream.Collectors;
 
