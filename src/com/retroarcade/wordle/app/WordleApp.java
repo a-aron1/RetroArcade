@@ -2,8 +2,9 @@ package com.retroarcade.wordle.app;
 
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
-
+import static com.retroarcade.wordle.Display.*;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -11,20 +12,47 @@ import java.util.Scanner;
 // TODO:  refactor with controller code
 
 public class WordleApp {
-    private final static boolean DEBUG_MODE = false; // This DEBUG_MODE will display the answer for testing purposes.
-    private final static String HISTORY_PATH = "data/history.txt"; // This contains the path to the history text file.
+    // initalize the WordleBoard and Scanner for user input.
+    private final Board board = new Board("resources/words.txt", 6);
+    private Scanner input = new Scanner(System.in); // reads console input
 
-    public static void main(String[] args) throws Exception {
-        // initalize the WordleBoard and Scanner for user input.
-        Board board = new Board("resources/words.txt", 6);
-        Scanner input = new Scanner(System.in);
+    // statics
+    private final static boolean DEBUG_MODE = false; // displays the answer for testing purposes
+    private final static String HISTORY_PATH = "data/history.txt"; // path to the history file
+
+    public WordleApp() throws IOException {
+    }
+
+    public void execute() throws Exception {
+        /* TODO if time allows
+        welcome();
+        promptForName();
+
+        mainMenu();
+        startGame();
+            while
+                clear()
+                showBoard();
+                debugMode(); // showAnswer()
+                clearBoard();
+                promptForWord(); // both prompt and board.guess(...)
+        clear()
+        showBoard()
+        recordResults()
+        winScreen()
+        loseScreen()
+        showAnswer()
+        timer()
+        showStats()
+        exit()
+         */
 
         while (!board.isGameOver()) {
             Display.clear();
             Display.print(board);
 
             if (DEBUG_MODE) {
-                Display.printAnswer(board.getAnswer());
+                printAnswer(board.getAnswer());
             }
 
             Display.promptForWord();
@@ -33,7 +61,7 @@ public class WordleApp {
 
         Display.clear();
         Display.print(board);
-        Display.printAnswer(board.getAnswer());
+        printAnswer(board.getAnswer());
         recordGame(board);
 
         // TODO:  ask user if they would like to play again or exit the game
