@@ -1,4 +1,4 @@
-package com.retroarcade.wordle.client;
+package com.retroarcade.wordle.app;
 
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
@@ -8,13 +8,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-public class WordleClient {
-    private final static boolean DEBUG_MODE = true; // This DEBUG_MODE will display the answer for testing purposes.
-    private final static String HISTORY_PATH = "history.txt"; // This contains the path to the history text file.
+// TODO:  refactor with controller code
+
+public class WordleApp {
+    private final static boolean DEBUG_MODE = false; // This DEBUG_MODE will display the answer for testing purposes.
+    private final static String HISTORY_PATH = "data/history.txt"; // This contains the path to the history text file.
 
     public static void main(String[] args) throws Exception {
         // initalize the WordleBoard and Scanner for user input.
-        Board board = new Board("words.txt", 6);
+        Board board = new Board("resources/words.txt", 6);
         Scanner input = new Scanner(System.in);
 
         while (!board.isGameOver()) {
