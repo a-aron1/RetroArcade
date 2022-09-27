@@ -1,8 +1,4 @@
-package com.wordle;
-
-/*
- * Wrapper class to initialize list of words from text file using stream()
- */
+package com.retroarcade.wordle;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,31 +7,32 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+// Wrapper class to initialize a list of words from a txt.
 public class WordCheck {
     private List<String> words;
 
-    // Ctors
-    public WordCheck(String filePath) throws IOException {
+    // INIT OVERLOADS
+    WordCheck(String filePath) throws IOException {
         this.words = Files.readAllLines(Paths.get(filePath)).stream()
-                .filter(word -> !(word.contains(".")) || word.contains("-") || word.contains(",") || word.contains("'"))
+                .filter(word -> !(word.contains(".") || word.contains("-") || word.contains(",") || word.contains("'")))
                 .map(word -> word.toLowerCase())
                 .collect(Collectors.toList());
     }
 
-    public WordCheck(String filePath, int length) throws IOException {
+    // WordLength (int) will filter out words of any other length.
+    WordCheck(String filePath, int wordLength) throws IOException {
         this.words = Files.readAllLines(Paths.get(filePath)).stream()
-                .filter(word -> word.length() == length
-                        && !(word.contains(".")) || word.contains("-") || word.contains(",") || word.contains("'"))
+                .filter(word -> word.length() == wordLength
+                        && !(word.contains(".") || word.contains("-") || word.contains(",") || word.contains("'")))
                 .map(word -> word.toLowerCase())
                 .collect(Collectors.toList());
     }
 
-    // Action methods
-    public boolean isWordInList(String word) {
+    public boolean containsWord(String word) {
         return words.contains(word);
     }
 
-    public String fetchRandomWord() {
+    public String randomWord() {
         return words.get(new Random().nextInt(words.size()));
     }
 }
