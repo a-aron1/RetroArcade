@@ -1,7 +1,5 @@
 package com.retroarcade.wordle;
 
-import java.util.Timer;
-
 public class Display {
     private static String title =
             "=== WELCOME TO:  W O R D L E! ===\n===== in java, By RetroArcade =====\n";
@@ -31,7 +29,7 @@ public class Display {
 
         private Color(String background, String foreground) {
             this(background);
-
+            this.foreground = foreground;
         }
     }
 
@@ -43,9 +41,6 @@ public class Display {
     public static void setLeftPadding(String str) {
         leftPadding = str;
     }
-
-
-
 
     // methods
     public static void print(Board board) {
@@ -66,9 +61,6 @@ public class Display {
             }
         }
     }
-
-
-
 
     public static void promptForWord() {
         System.out.print("Enter your best guess (five-letter word):\n ");
