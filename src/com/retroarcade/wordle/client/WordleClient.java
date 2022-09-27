@@ -61,6 +61,7 @@ public class WordleClient {
         }
 
         Files.writeString(Path.of(HISTORY_PATH),
-                String.format("GamesPlayed: %d\nGamesWon: %d\n%s", numGamesPlayed, numGamesWon, winningWord));
+                String.format("GamesPlayed: %d\nGamesWon: %d\n%s"
+                        , numGamesPlayed, numGamesWon, winningWord));
     }
 }

@@ -17,6 +17,7 @@ public class Display {
 
         private final String ansi_background;
         private final static String ANSI_RESET = "\u001B[0m";
+        //ansi_foreground -- rename (add to ctor)
 
         private Color(String ansi_background) {
             this.ansi_background = ansi_background;
