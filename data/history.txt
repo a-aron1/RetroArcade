@@ -1,5 +1,5 @@
-GamesPlayed: 31
-GamesWon: 19
+GamesPlayed: 36
+GamesWon: 23
 YOJAN
 LAMDA
 CMSGT
@@ -19,3 +19,7 @@ WILIS
 HERRY
 CRICK
 TEILS
+CABIN
+NONAN
+REEKS
+PESKY

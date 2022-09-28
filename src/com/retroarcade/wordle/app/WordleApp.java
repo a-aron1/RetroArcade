@@ -3,43 +3,51 @@ package com.retroarcade.wordle.app;
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
 import static com.retroarcade.wordle.Display.*;
+import static com.retroarcade.wordle.Screens.*;
 
 import java.io.IOException;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
-
-// TODO:  refactor with controller code
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class WordleApp {
     // statics
     private final static boolean DEBUG_MODE = true; // displays the answer for testing purposes
     private final static String HISTORY_PATH = "data/history.txt"; // path to the history file
+    private final static Timer TIMER = new Timer();
+
+    // fields
+    private long startTime = System.currentTimeMillis();
 
     // initalize the WordleBoard and Scanner for user input.
     private final Board board = new Board("resources/words.txt", 6);
     private Scanner input = new Scanner(System.in); // reads console input
-    private long startTime = System.currentTimeMillis();
 
     public WordleApp() throws IOException {
     }
 
     public void execute() throws Exception {
-        welcome();
-        runGame();
+        // menuTimer();
+        welcome(); // chooseScreen();
+        playGame();  // runGame();
         clearBoard();
         updateBoard();
         showAnswer();
         recordGame(board);
         gameResult();
-        //showStats();
-        //goodbye();
+        //showStats();  // goodbye();
     }
 
-    private void welcome() {
-        String title = "======= WELCOME TO:  W O R D L E! =======\n\n====================== By RetroArcade ===\n";
-        System.out.println("\n" + title);
+    private void welcome() throws IOException {
+        startScreen();
+        playGame();
+    }
+
+    private void playGame() {
+        runGame();
     }
 
     private void runGame() {
