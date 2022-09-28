@@ -51,8 +51,8 @@ public class Screens {
     }
 
     public static void getUserInput() throws IOException {
-        System.out.println("\n" + ANSI_PURPLE + "                                       Enter an option from below");
-        System.out.println(ANSI_PURPLE + "                     Enter: [P]: Play Game |  [L]: Leader board] |  [I]: Instructions\n");
+        System.out.println("\n" + ANSI_PURPLE + "                                      Enter an option from below\n");
+        System.out.println(ANSI_PURPLE + "                               Choose:  [P]lay Game |  [I]nstructions\n");
         // prompter for user input
     }
 
@@ -71,7 +71,7 @@ public class Screens {
         String menu = scan.next();
 
         if (menu.equals("I")){
-            System.out.println(ANSI_BLUE + instruct);
+            System.out.println(ANSI_BLUE + instruct + ANSI_RESET);
             java.util.Timer t = new Timer();
             TIMER.scheduleAtFixedRate(menuTimer, 4000, 1000000);
             System.out.println("\n\n"); // adds space to output
@@ -80,13 +80,13 @@ public class Screens {
         if (menu.equals("P")){
             //Display.render(board);
             //playGame();
-            System.out.println("Let's get started!");
+            System.out.println("\nLet's get started!\n" + ANSI_RESET);
         }
 
-        if (menu.equals("S")){
-            System.out.println("stats to be printed here");
-            TIMER.scheduleAtFixedRate(menuTimer, 4000, 1000000);
-            chooseScreen();
-        }
+//        if (menu.equals("S")){
+//            System.out.println("tats to be printed here");
+//            TIMER.scheduleAtFixedRate(menuTimer, 4000, 1000000);
+//            chooseScreen();
+//        }
     }
 }
