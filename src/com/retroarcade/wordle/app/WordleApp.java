@@ -3,8 +3,15 @@ package com.retroarcade.wordle.app;
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
 import static com.retroarcade.wordle.Display.*;
-import java.io.File;
+import static java.time.ZoneOffset.UTC;
+import static java.time.temporal.ChronoField.MINUTE_OF_DAY;
+
+import java.time.*;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.io.IOException;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -108,12 +115,23 @@ public class WordleApp {
                         , numGamesPlayed, numGamesWon, winningWord));
     }
 
-    public void showResults() {
+//    private String countDown(Date d) {
+//        LocalDateTime today = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
+//        LocalDateTime midnight = today.plusDays(1)
+//                .withHour()
+//                .withMinute()
+//                .withSecond()
+//                .withNano();
+//        long minutesBetween = ChronoUnit.MINUTES.between(today, midnight);
+//        return minutesBetween + " minutes";
+//    }
+
+    private void showResults() {
         int tries = board.countGuesses();
         long endTime = System.currentTimeMillis();
         String numTries = (tries < 2) ? " try!\n" : " tries!\n";
 
-        if(board.hasWon()) {
+        if (board.hasWon()) {
             System.out.println("\nNice work!\nYou found the answer in "
                     + ((endTime - startTime) / 1000)
                     + " seconds...\nAnd in just "
@@ -124,6 +142,6 @@ public class WordleApp {
                     + ((endTime - startTime) / 1000)
                     + " seconds.  \n Bummer :(\nBetter luck next time!\n");
         }
+        System.out.println("Start preparing:  The next Wordle comes out in "); //+ countDown());
     }
-
 }
