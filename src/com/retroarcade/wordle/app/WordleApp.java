@@ -29,7 +29,7 @@ public class WordleApp {
         promptForName();
 
         mainMenu();
-        startGame();
+        runGame();
             while
                 clear()
                 showBoard();
@@ -56,7 +56,7 @@ public class WordleApp {
             }
 
             Display.promptForWord();
-            board.guess(input.nextLine().toLowerCase());
+            board.guess(input.nextLine().toUpperCase());
         }
 
         Display.clear();
