@@ -114,15 +114,19 @@ public class WordleApp {
         String numTries = (tries < 2) ? " try!\n" : " tries!\n";
 
         if (board.hasWon()) {
+            System.out.println(ANSI_GREEN+winBanner );
             System.out.println("\nNice work!\nYou found the answer in "
                     + ((endTime - startTime) / 1000)
                     + " seconds...\nAnd in just "
                     + tries + numTries + "Impressive!\n");
+            System.out.println(ANSI_RESET);
         }
         else {
-            System.out.println("\nYou lost, and in only "
+            System.out.println(ANSI_RED+lostBanner);
+            System.out.println("\nYou lost, in "
                     + ((endTime - startTime) / 1000)
-                    + " seconds.  \n Bummer :(\nBetter luck next time!\n");
+                    + " seconds.  \n  \nBetter luck next time!\n");
+            System.out.println(ANSI_RESET);
         }
         System.out.println("Start preparing:  The next Wordle comes out in "); //+ countDown());
     }
