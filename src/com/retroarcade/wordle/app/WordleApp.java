@@ -3,13 +3,7 @@ package com.retroarcade.wordle.app;
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
 import static com.retroarcade.wordle.Display.*;
-import static java.time.ZoneOffset.UTC;
-import static java.time.temporal.ChronoField.MINUTE_OF_DAY;
 
-import java.time.*;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.io.IOException;
 import java.io.File;
 import java.nio.file.Files;
@@ -33,48 +27,14 @@ public class WordleApp {
 
     public void execute() throws Exception {
         welcome();
-
-        /* TODO if time allows
-        mainMenu();
         runGame();
-            trackTimePlayed()
-            while
-                clear()
-                showBoard();
-                debugMode(); // showAnswer()
-                clearBoard();
-                promptForWord(); // both prompt and board.guess(...)
-        clear()
-        showBoard()
-        recordResults()
-        winScreen()
-        loseScreen()
-        showAnswer()
-        timer()
-        showStats()
-        exit()
-         */
-
-        while (!board.isGameOver()) {
-            Display.clear();
-            Display.render(board);
-
-            if (DEBUG_MODE) {
-                showAnswer(board.getAnswer());
-                System.out.println(); // empty line in output
-            }
-
-            Display.promptForWord();
-            board.guess(input.nextLine().toUpperCase());
-        }
-
-        Display.clear();
-        Display.render(board);
-        showAnswer(board.getAnswer());
+        clearBoard();
+        updateBoard();
+        showAnswer();
         recordGame(board);
-        showResults();
-
-        // TODO:  ask user if they would like to play again or exit the game
+        gameResult();
+        //showStats();
+        //goodbye();
     }
 
     private void welcome() {
@@ -82,13 +42,37 @@ public class WordleApp {
         System.out.println("\n" + title);
     }
 
+    private void runGame() {
+        while (!board.isGameOver()) {
+            Display.clear();
+            Display.render(board);
+
+            if (DEBUG_MODE) {
+                printAnswer(board.getAnswer());
+                System.out.println(); // empty line in output
+            }
+
+            Display.promptForWord();
+            board.guess(input.nextLine().toUpperCase());
+        }
+    }
+
+    private void clearBoard() {
+        Display.clear();
+    }
+
+    private void updateBoard() {
+        Display.render(board);
+    }
+
+    private void showAnswer() {
+        printAnswer(board.getAnswer());
+    }
+
     /*
      * WordleBoard - Takes a board to record game results
      * The gamesPlayed counter at the HISTORY_PATH increments
      * If won, gamesWon increments and the winning word is recorded
-     *
-     * TODO:
-     *  Winning streak
      */
     private void recordGame(Board board) throws Exception {
         Scanner reader = new Scanner(new File(HISTORY_PATH));
@@ -115,18 +99,7 @@ public class WordleApp {
                         , numGamesPlayed, numGamesWon, winningWord));
     }
 
-//    private String countDown(Date d) {
-//        LocalDateTime today = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
-//        LocalDateTime midnight = today.plusDays(1)
-//                .withHour()
-//                .withMinute()
-//                .withSecond()
-//                .withNano();
-//        long minutesBetween = ChronoUnit.MINUTES.between(today, midnight);
-//        return minutesBetween + " minutes";
-//    }
-
-    private void showResults() {
+    private void gameResult() {
         int tries = board.countGuesses();
         long endTime = System.currentTimeMillis();
         String numTries = (tries < 2) ? " try!\n" : " tries!\n";

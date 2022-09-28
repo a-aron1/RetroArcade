@@ -1,12 +1,12 @@
-GamesPlayed: 29
-GamesWon: 18
-yojan
-lamda
-cmsgt
-thira
-yield
-maize
-duroc
+GamesPlayed: 31
+GamesWon: 19
+YOJAN
+LAMDA
+CMSGT
+THIRA
+YIELD
+MAIZE
+DUROC
 AFLAP
 BREID
 GALIS
@@ -18,3 +18,4 @@ VENAS
 WILIS
 HERRY
 CRICK
+TEILS

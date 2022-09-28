@@ -65,7 +65,7 @@ public class Display {
         System.out.print("Enter your best guess (five-letter word):\n ");
     }
 
-    public static void showAnswer(String str) {
+    public static void printAnswer(String str) {
         System.out.println("The answer to today's Wordle is:\n " + str);
     }
 
