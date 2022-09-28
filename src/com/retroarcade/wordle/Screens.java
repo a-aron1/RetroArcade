@@ -20,6 +20,18 @@ public class Screens {
 
     private static String input;
     public static String instruct;
+    public static String winBanner;
+    public static String lostBanner;
+
+    static {
+        try {
+            winBanner = Files.readString(Path.of("resources/Banners/winBanner.txt")) ;
+            lostBanner = Files.readString(Path.of("resources/Banners/lostBanner.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private final static Timer TIMER = new Timer();
 
     public static String getInput() {
