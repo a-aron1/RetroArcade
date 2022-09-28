@@ -13,9 +13,10 @@ public class Display {
         BG_PURPLE("\033[0;105m"),
         BG_CYAN("\033[0;106m"),
         BG_WHITE("\033[0;107m"),
-        FG_BLACK_BG_GREEN("\033[0;102m", "\033[0;107m"),
-        FG_WHITE_BG_GREEN("\033[0;102m", "\033[0;100m"),
-        FG_BLACK_BG_YELLOW("\033[0;103m", "\033[0;100m");
+        FG_BLACK_BG_GREEN("\033[0;102m", "\u001B[30m"),
+        FG_BLACK_BG_YELLOW("\033[0;103m", "\u001B[30m"),
+        FG_WHITE_BG_GREEN("\033[0;102m", "\u001B[37m"),
+        FG_WHITE_BG_YELLOW("\033[0;103m", "\u001B[37m");
 
         private final String background;
         private String foreground;
@@ -81,10 +82,10 @@ public class Display {
             char numChar = toPrint.charAt(n);
 
             if (n < toCompare.length() && numChar == toCompare.charAt(n)) {
-                output += highlightText(Character.toString(numChar), Color.BG_GREEN);
+                output += highlightText(Character.toString(numChar), Color.FG_BLACK_BG_GREEN);
             }
             else if (toCompare.contains(String.valueOf(numChar))) {
-                output += highlightText(Character.toString(numChar), Color.BG_YELLOW);
+                output += highlightText(Character.toString(numChar), Color.FG_BLACK_BG_YELLOW);
             }
             else {
                 output += numChar;
@@ -105,6 +106,6 @@ public class Display {
 
     // coloring
     private static String highlightText(String text, Color toHighlight) {
-        return toHighlight.background + text + Color.RESET;
+        return toHighlight.background + toHighlight.foreground + text + Color.RESET;
     }
 }

@@ -43,7 +43,7 @@ public class WordleApp {
 
     private void welcome() throws IOException {
         startScreen();
-        playGame();
+        //playGame();
     }
 
     private void playGame() {
