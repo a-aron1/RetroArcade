@@ -1,5 +1,5 @@
-GamesPlayed: 14
-GamesWon: 7
+GamesPlayed: 29
+GamesWon: 18
 yojan
 lamda
 cmsgt
@@ -7,3 +7,14 @@ thira
 yield
 maize
 duroc
+AFLAP
+BREID
+GALIS
+DELLS
+KONKS
+KOMBU
+UDALS
+VENAS
+WILIS
+HERRY
+CRICK
