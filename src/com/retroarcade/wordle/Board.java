@@ -10,9 +10,11 @@ public class Board {
     private String answer;
     private WordCheck wordList;
 
-    // INIT OVERLOADS
-    // The filePath (String) should point to a txt containing words for the
-    // WordleBoard. Size (int) and wordlength (int) allow for various size boards.
+    /*
+     * Initial overloads.
+     * The filePath (String) should point to a txt containing words for the WordleBoard
+     * Size (int) and wordlength (int) allow for various size boards
+     */
     public Board(String filePath) throws IOException {
         this.rowCount = 6;
         this.colCount = 5;
@@ -65,8 +67,16 @@ public class Board {
     }
 
     public void guess(String str) {
-        if (str.length() == getWidth() && wordList.containsWord(str)) {
-            guesses.add(str);
+
+        if (str.length() == 5 && str.chars().allMatch(Character::isLetter)) {
+
+            if (str.length() == getWidth() && wordList.containsWord(str)) {
+                guesses.add(str);
+            }
         }
+        else {
+            System.out.println("Please enter a 5 letter word\n");
+        }
+
     }
 }
