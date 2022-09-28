@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Board extends Screens {
     private int rowCount;
     private int colCount;
-    private ArrayList<String> guesses = new ArrayList<String>();
+    private ArrayList<String> guesses = new ArrayList<>();
     private String answer;
     private WordCheck wordList;
 
