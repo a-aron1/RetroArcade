@@ -38,7 +38,7 @@ public class WordleApp {
     }
 
     private void welcome() {
-        String title = "=== WELCOME TO:  W O R D L E! ===\n\n============== By RetroArcade ===\n";
+        String title = "======= WELCOME TO:  W O R D L E! =======\n\n====================== By RetroArcade ===\n";
         System.out.println("\n" + title);
     }
 

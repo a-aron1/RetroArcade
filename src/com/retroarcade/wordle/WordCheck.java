@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class WordCheck {
     private final List<String> words;
 
-    // INIT OVERLOADS
+    // initial overloads
     WordCheck(String filePath) throws IOException {
         this.words = Files.readAllLines(Paths.get(filePath)).stream()
                 .filter(word -> !(word.contains(".") || word.contains("-") || word.contains(",") || word.contains("'")))
