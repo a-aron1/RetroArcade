@@ -1,48 +1,24 @@
 package com.retroarcade.wordle;
 
+import com.apps.util.Console;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Screens {
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
 
-    private static String input;
+    public static final String GREEN = "\u001B[32m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+
     public static String instruct;
-    private final static Timer TIMER = new Timer();
-
-    public static String getInput() {
-        return input;
-    }
-
-    public static void setInput(String input) {
-        Screens.input = input;
-    }
-
-    public static TimerTask menuTimer = new TimerTask() {
-        public void run(){
-            System.out.println("");
-            try {
-                getUserInput();
-                chooseScreen();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        };
-    };
-
 
     public static void startScreen() throws IOException {
         welcomeBanner();
@@ -51,42 +27,35 @@ public class Screens {
     }
 
     public static void getUserInput() throws IOException {
-        System.out.println("\n" + ANSI_PURPLE + "                                      Enter an option from below\n");
-        System.out.println(ANSI_PURPLE + "                               Choose:  [P]lay Game |  [I]nstructions\n");
+        System.out.println("\n" + PURPLE + "                                       Enter choose an option:\n");
+        System.out.println(CYAN + "                        [P]lay Wordle Game now" + PURPLE + "  |  Review the [I]nstructions\n");
         // prompter for user input
     }
 
     public static void welcomeBanner() throws IOException {
         String welcome = Files.readString(Path.of("resources/Banners/welcome.txt"));
         String worlde = Files.readString(Path.of("resources/Banners/welcomeBanner.txt"));
-        System.out.print(welcome + ANSI_GREEN);
-        System.out.print(worlde + ANSI_YELLOW);
+        System.out.print(welcome + GREEN);
+        System.out.print(worlde + YELLOW);
         System.out.println("");
     }
 
     public static void chooseScreen() throws IOException {
         instruct = Files.readString(Path.of("resources/Banners/instructions.txt")).trim();
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter: ");
-        String menu = scan.next();
+        System.out.println(PURPLE + "Enter " + CYAN + "[p]" + PURPLE + " to play or [i] to see the instructions: ");
+        String menu = scan.nextLine();
 
-        if (menu.equals("I")){
-            System.out.println(ANSI_BLUE + instruct + ANSI_RESET);
-            java.util.Timer t = new Timer();
-            TIMER.scheduleAtFixedRate(menuTimer, 4000, 1000000);
-            System.out.println("\n\n"); // adds space to output
+        if (menu.equals("I") || menu.equals("i")){
+            System.out.println(BLUE + instruct + RESET);
+            Console.pause(10000);
+            Console.blankLines(2);
+            System.out.println("Hope that helped.  Now let's play!"); // adds space to output
+            Console.blankLines(2);
         }
 
-        if (menu.equals("P")){
-            //Display.render(board);
-            //playGame();
-            System.out.println("\nLet's get started!\n" + ANSI_RESET);
+        if (menu.equals("P") || menu.equals("p")){
+            System.out.println("\nLet's get started!\n" + RESET);
         }
-
-//        if (menu.equals("S")){
-//            System.out.println("tats to be printed here");
-//            TIMER.scheduleAtFixedRate(menuTimer, 4000, 1000000);
-//            chooseScreen();
-//        }
     }
 }

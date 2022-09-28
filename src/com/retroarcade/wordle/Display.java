@@ -1,10 +1,16 @@
 package com.retroarcade.wordle;
 
+import com.apps.util.Console;
+
 public class Display {
-    private static String title = "";
+//    private static String title = "";
     private static String leftPadding = " ";
 
     private enum Color {
+        FG_BLACK_BG_GREEN("\033[0;102m", "\u001B[30m"),
+        FG_BLACK_BG_YELLOW("\033[0;103m", "\u001B[30m"),
+        FG_WHITE_BG_GREEN("\033[0;102m", "\u001B[37m"),
+        FG_WHITE_BG_YELLOW("\033[0;103m", "\u001B[37m"),
         BG_GREEN("\033[0;102m"),
         BG_YELLOW("\033[0;103m"),
         BG_RED("\033[0;101m"),
@@ -12,16 +18,12 @@ public class Display {
         BG_BLUE("\033[0;104m"),
         BG_PURPLE("\033[0;105m"),
         BG_CYAN("\033[0;106m"),
-        BG_WHITE("\033[0;107m"),
-        FG_BLACK_BG_GREEN("\033[0;102m", "\u001B[30m"),
-        FG_BLACK_BG_YELLOW("\033[0;103m", "\u001B[30m"),
-        FG_WHITE_BG_GREEN("\033[0;102m", "\u001B[37m"),
-        FG_WHITE_BG_YELLOW("\033[0;103m", "\u001B[37m");
+        BG_WHITE("\033[0;107m");
+
+        private final static String RESET = "\u001B[0m";
 
         private final String background;
         private String foreground;
-        private final static String RESET = "\u001B[0m";
-        //ansi_foreground -- rename (add to ctor)
 
         private Color(String background) {
             this.background = background;
@@ -34,17 +36,17 @@ public class Display {
     }
 
     // setters
-    public static void setTitle(String str) {
-        title = str;
-    }
-
-    public static void setLeftPadding(String str) {
-        leftPadding = str;
-    }
+//    public static void setTitle(String str) {
+//        title = str;
+//    }
+//
+//    public static void setLeftPadding(String str) {
+//        leftPadding = str;
+//    }
 
     // methods
     public static void render(Board board) {
-        System.out.println(); // blank line in output
+        Console.blankLines(1);
         for (int i = 0; i < board.getHeight(); i++) {
             if (i < board.countGuesses()) {
                 Display.printComparison(board.numGuess(i), board.getAnswer(), " | ");
@@ -68,11 +70,6 @@ public class Display {
 
     public static void printAnswer(String str) {
         System.out.println("The answer to today's Wordle is:\n " + str);
-    }
-
-    public static void clear() {
-        System.out.print("\033\143");
-        System.out.flush();
     }
 
     // print helpers
@@ -101,8 +98,6 @@ public class Display {
     private static void paddedPrint(String str) {
         System.out.println(leftPadding + str);
     }
-
-    // TODO - render foreground color
 
     // coloring
     private static String highlightText(String text, Color toHighlight) {

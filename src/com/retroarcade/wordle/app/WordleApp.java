@@ -1,5 +1,7 @@
 package com.retroarcade.wordle.app;
 
+import com.apps.util.Console;
+import com.apps.util.Prompter;
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
 import static com.retroarcade.wordle.Display.*;
@@ -23,6 +25,7 @@ public class WordleApp {
     // initalize the WordleBoard and Scanner for user input.
     private final Board board = new Board("resources/words.txt", 6);
     private Scanner input = new Scanner(System.in); // reads console input
+    Prompter prompter = new Prompter(new Scanner(System.in));
 
     public WordleApp() throws IOException {
     }
@@ -50,7 +53,7 @@ public class WordleApp {
 
     private void runGame() {
         while (!board.isGameOver()) {
-            Display.clear();
+            clearBoard();
             Display.render(board);
 
             if (DEBUG_MODE) {
@@ -64,7 +67,7 @@ public class WordleApp {
     }
 
     private void clearBoard() {
-        Display.clear();
+        Console.clear();
     }
 
     private void updateBoard() {
