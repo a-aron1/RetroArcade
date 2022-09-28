@@ -21,6 +21,7 @@ public class Display {
         BG_WHITE("\033[0;107m");
 
         private final static String RESET = "\u001B[0m";
+        public static final String BOLD = "\u001B[1m";
 
         private final String background;
         private String foreground;
@@ -65,11 +66,13 @@ public class Display {
     }
 
     public static void promptForWord() {
-        System.out.print("Enter your best guess (five-letter word):\n ");
+        System.out.print("Enter your best guess (five-letter word):  ");
+        Console.blankLines(1);
     }
 
     public static void printAnswer(String str) {
-        System.out.println("The answer to today's Wordle is:\n " + str);
+        System.out.println("The answer to today's Wordle is:  " + str);
+        Console.blankLines(1);
     }
 
     // print helpers
@@ -101,6 +104,6 @@ public class Display {
 
     // coloring
     private static String highlightText(String text, Color toHighlight) {
-        return toHighlight.background + toHighlight.foreground + text + Color.RESET;
+        return toHighlight.background + toHighlight.foreground + Color.BOLD + text + Color.RESET;
     }
 }

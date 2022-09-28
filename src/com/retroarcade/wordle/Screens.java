@@ -19,11 +19,22 @@ public class Screens {
     public static final String WHITE = "\u001B[37m";
 
     public static String instruct;
+    public static String winBanner = "resources/Banners/winBanner.txt";
+    public static String lostBanner;
 
     public static void startScreen() throws IOException {
         welcomeBanner();
         getUserInput();
         chooseScreen();
+    }
+
+    static {
+        try {
+            winBanner = Files.readString(Path.of("resources/Banners/winBanner.txt")) ;
+            lostBanner = Files.readString(Path.of("resources/Banners/lostBanner.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void getUserInput() throws IOException {
@@ -43,7 +54,10 @@ public class Screens {
     public static void chooseScreen() throws IOException {
         instruct = Files.readString(Path.of("resources/Banners/instructions.txt")).trim();
         Scanner scan = new Scanner(System.in);
-        System.out.println(PURPLE + "Enter " + CYAN + "[p]" + PURPLE + " to play or [i] to see the instructions: ");
+        System.out.println(PURPLE + "Hit enter or type " + CYAN + "[p]" + PURPLE + " to play or [i] to see the instructions: " + RESET);
+
+        //System.out.printf("");
+
         String menu = scan.nextLine();
 
         if (menu.equals("I") || menu.equals("i")){

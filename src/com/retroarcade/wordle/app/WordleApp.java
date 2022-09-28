@@ -4,6 +4,8 @@ import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
+import com.retroarcade.wordle.Screens;
+
 import static com.retroarcade.wordle.Display.*;
 import static com.retroarcade.wordle.Screens.*;
 import java.io.IOException;
@@ -58,7 +60,6 @@ public class WordleApp {
 
             if (DEBUG_MODE) {
                 printAnswer(board.getAnswer());
-                System.out.println(); // empty line in output
             }
 
             Display.promptForWord();
@@ -114,20 +115,22 @@ public class WordleApp {
         String numTries = (tries < 2) ? " try!\n" : " tries!\n";
 
         if (board.hasWon()) {
-            System.out.println(ANSI_GREEN+winBanner );
+            System.out.println(GREEN + winBanner);
             System.out.println("\nNice work!\nYou found the answer in "
                     + ((endTime - startTime) / 1000)
                     + " seconds...\nAnd in just "
                     + tries + numTries + "Impressive!\n");
-            System.out.println(ANSI_RESET);
+            System.out.println(RESET);
+            System.out.println(CYAN + "Start preparing now:  The next Wordle comes out at midnight!");
         }
         else {
-            System.out.println(ANSI_RED+lostBanner);
-            System.out.println("\nYou lost, in "
+            System.out.println(RED + lostBanner + RESET);
+            System.out.println(CYAN + "\nYou lost in "
                     + ((endTime - startTime) / 1000)
                     + " seconds.  \n  \nBetter luck next time!\n");
-            System.out.println(ANSI_RESET);
+            System.out.println(RESET);
+            System.out.println(BLUE + "Start preparing now:  The next Wordle comes out at midnight!");
         }
-        System.out.println("Start preparing:  The next Wordle comes out in "); //+ countDown());
+        System.exit(0);
     }
 }
