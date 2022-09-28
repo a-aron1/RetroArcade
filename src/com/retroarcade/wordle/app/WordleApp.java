@@ -4,14 +4,12 @@ import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
 import static com.retroarcade.wordle.Display.*;
 import static com.retroarcade.wordle.Screens.*;
-
 import java.io.IOException;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class WordleApp {
     // statics
