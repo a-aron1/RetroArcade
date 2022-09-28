@@ -3,7 +3,7 @@ package com.retroarcade.wordle;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Board {
+public class Board extends Screens {
     private int rowCount;
     private int colCount;
     private ArrayList<String> guesses = new ArrayList<String>();
@@ -33,6 +33,10 @@ public class Board {
         this.wordList = new WordCheck(filePath, wordLength);
         this.answer = wordList.randomWord();
     }
+
+
+
+
 
     // getters
     public int getHeight() {

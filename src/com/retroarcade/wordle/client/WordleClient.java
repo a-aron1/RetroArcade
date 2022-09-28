@@ -2,40 +2,109 @@ package com.retroarcade.wordle.client;
 
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
+import com.retroarcade.wordle.Screens;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Time;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class WordleClient {
+
+public class WordleClient extends Screens {
     private final static boolean DEBUG_MODE = true; // This DEBUG_MODE will display the answer for testing purposes.
     private final static String HISTORY_PATH = "history.txt"; // This contains the path to the history text file.
+    private static String input;
+    private static Board board;
+
+
+    public static Timer Timer = new Timer();
+    public static TimerTask menuTimer = new TimerTask() {
+        public void run(){
+            System.out.println("");
+            try {
+                getUserInput();
+                chooseScreen();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        };
+    };
+
+
+
+
+
+    public static void chooseScreen() throws IOException {
+        I = Files.readString(Path.of("lib/resources/Banners/instructions/instructions.txt")).trim();
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter: ");
+        input = scan.next();
+
+        if(input.equals("I")){
+            System.out.println(ANSI_BLUE+I);
+            java.util.Timer t = new Timer();
+            Timer.scheduleAtFixedRate(menuTimer, 4000, 1000000);
+
+        } if(input.equals("P")){
+            Display.print(board);
+        } if(input.equals("S")){
+            System.out.println("stats to be printed here");
+            Timer.scheduleAtFixedRate(menuTimer, 4000, 1000000);
+            chooseScreen();
+        } else {
+            System.out.println("Please enter a valid option: [P]lay game, [I]nstructions, [S]tats");
+
+        }
+
+    }
+
+
 
     public static void main(String[] args) throws Exception {
         // initalize the WordleBoard and Scanner for user input.
-        Board board = new Board("words.txt", 6);
-        Scanner input = new Scanner(System.in);
+        board = new Board("words.txt", 6);
 
-        while (!board.isGameOver()) {
-            Display.clear();
-            Display.print(board);
 
-            if (DEBUG_MODE) {
-                Display.printAnswer(board.getAnswer());
-            }
 
-            Display.promptForWord();
-            board.guess(input.nextLine().toLowerCase());
-        }
 
-        Display.clear();
-        Display.print(board);
-        Display.printAnswer(board.getAnswer());
-        recordGame(board);
+
+            mainMain();
+            chooseScreen();
+
+
+//        while (!board.isGameOver()) {
+//
+//          //  Display.clear();
+//            //Display.print(board);
+//
+//            if (DEBUG_MODE) {
+//                Display.printAnswer(board.getAnswer());
+//            }
+//
+//            Display.promptForWord();
+//            board.guess(input.nextLine().toLowerCase());
+//        }
+
+       // Display.clear();
+       // WelcomeBanner();
+        //getUserInput();
+        //Display.clear();
+
+       // Display.print(board);
+        //Display.printAnswer(board.getAnswer());
+        //recordGame(board);
 
         // TODO:  ask user if they would like to play again or exit the game
     }
+
+
+
+
 
     // ARGS: (WordleBoard) Takes a board to record it's game.
     // The games played counter at the HISTORY_PATH is incremented. If the board was
