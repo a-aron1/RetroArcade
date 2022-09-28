@@ -12,24 +12,25 @@ import java.util.Scanner;
 // TODO:  refactor with controller code
 
 public class WordleApp {
+    // statics
+    private final static boolean DEBUG_MODE = true; // displays the answer for testing purposes
+    private final static String HISTORY_PATH = "data/history.txt"; // path to the history file
+
     // initalize the WordleBoard and Scanner for user input.
     private final Board board = new Board("resources/words.txt", 6);
     private Scanner input = new Scanner(System.in); // reads console input
-
-    // statics
-    private final static boolean DEBUG_MODE = false; // displays the answer for testing purposes
-    private final static String HISTORY_PATH = "data/history.txt"; // path to the history file
+    private long startTime = System.currentTimeMillis();
 
     public WordleApp() throws IOException {
     }
 
     public void execute() throws Exception {
-        /* TODO if time allows
         welcome();
-        promptForName();
 
+        /* TODO if time allows
         mainMenu();
         runGame();
+            trackTimePlayed()
             while
                 clear()
                 showBoard();
@@ -49,10 +50,11 @@ public class WordleApp {
 
         while (!board.isGameOver()) {
             Display.clear();
-            Display.print(board);
+            Display.render(board);
 
             if (DEBUG_MODE) {
-                printAnswer(board.getAnswer());
+                showAnswer(board.getAnswer());
+                System.out.println(); // empty line in output
             }
 
             Display.promptForWord();
@@ -60,17 +62,28 @@ public class WordleApp {
         }
 
         Display.clear();
-        Display.print(board);
-        printAnswer(board.getAnswer());
+        Display.render(board);
+        showAnswer(board.getAnswer());
         recordGame(board);
+        showResults();
 
         // TODO:  ask user if they would like to play again or exit the game
     }
 
-    // ARGS: (WordleBoard) Takes a board to record it's game.
-    // The games played counter at the HISTORY_PATH is incremented. If the board was
-    // completed successfully that is also recorded along with the winning word.
-    public static void recordGame(Board board) throws Exception {
+    private void welcome() {
+        String title = "=== WELCOME TO:  W O R D L E! ===\n\n============== By RetroArcade ===\n";
+        System.out.println("\n" + title);
+    }
+
+    /*
+     * WordleBoard - Takes a board to record game results
+     * The gamesPlayed counter at the HISTORY_PATH increments
+     * If won, gamesWon increments and the winning word is recorded
+     *
+     * TODO:
+     *  Winning streak
+     */
+    private void recordGame(Board board) throws Exception {
         Scanner reader = new Scanner(new File(HISTORY_PATH));
         String gamesPlayed = reader.nextLine();
         String gamesWon = reader.nextLine();
@@ -94,4 +107,23 @@ public class WordleApp {
                 String.format("GamesPlayed: %d\nGamesWon: %d\n%s"
                         , numGamesPlayed, numGamesWon, winningWord));
     }
+
+    public void showResults() {
+        int tries = board.countGuesses();
+        long endTime = System.currentTimeMillis();
+        String numTries = (tries < 2) ? " try!\n" : " tries!\n";
+
+        if(board.hasWon()) {
+            System.out.println("\nNice work!\nYou found the answer in "
+                    + ((endTime - startTime) / 1000)
+                    + " seconds...\nAnd in just "
+                    + tries + numTries + "Impressive!\n");
+        }
+        else {
+            System.out.println("\nYou lost, and in only "
+                    + ((endTime - startTime) / 1000)
+                    + " seconds.  \n Bummer :(\nBetter luck next time!\n");
+        }
+    }
+
 }

@@ -1,8 +1,7 @@
 package com.retroarcade.wordle;
 
 public class Display {
-    private static String title =
-            "=== WELCOME TO:  W O R D L E! ===\n===== in java, By RetroArcade =====\n";
+    private static String title = "";
     private static String leftPadding = " ";
 
     private enum Color {
@@ -43,8 +42,8 @@ public class Display {
     }
 
     // methods
-    public static void print(Board board) {
-        System.out.println(title);
+    public static void render(Board board) {
+        System.out.println(); // blank line in output
         for (int i = 0; i < board.getHeight(); i++) {
             if (i < board.countGuesses()) {
                 Display.printComparison(board.numGuess(i), board.getAnswer(), " | ");
@@ -66,8 +65,8 @@ public class Display {
         System.out.print("Enter your best guess (five-letter word):\n ");
     }
 
-    public static void printAnswer(String str) {
-        System.out.println("The answer is:\n " + str);
+    public static void showAnswer(String str) {
+        System.out.println("The answer to today's Wordle is:\n " + str);
     }
 
     public static void clear() {
@@ -102,7 +101,9 @@ public class Display {
         System.out.println(leftPadding + str);
     }
 
-    // ansi text coloring
+    // TODO - render foreground color
+
+    // coloring
     private static String highlightText(String text, Color toHighlight) {
         return toHighlight.background + text + Color.RESET;
     }
