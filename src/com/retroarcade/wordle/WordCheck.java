@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 
 // Wrapper class to initialize a list of words from a txt.
 public class WordCheck {
-    private List<String> words;
+    private final List<String> words;
 
     // INIT OVERLOADS
     WordCheck(String filePath) throws IOException {
         this.words = Files.readAllLines(Paths.get(filePath)).stream()
                 .filter(word -> !(word.contains(".") || word.contains("-") || word.contains(",") || word.contains("'")))
-                .map(word -> word.toLowerCase())
+                .map(String::toUpperCase)
                 .collect(Collectors.toList());
     }
 
@@ -24,7 +24,7 @@ public class WordCheck {
         this.words = Files.readAllLines(Paths.get(filePath)).stream()
                 .filter(word -> word.length() == wordLength
                         && !(word.contains(".") || word.contains("-") || word.contains(",") || word.contains("'")))
-                .map(word -> word.toLowerCase())
+                .map(String::toUpperCase)
                 .collect(Collectors.toList());
     }
 
