@@ -8,4 +8,4 @@ public class WordleMain {
         WordleApp app = new WordleApp();
         app.execute();
     }
-}
+}p

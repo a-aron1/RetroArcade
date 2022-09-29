@@ -36,10 +36,6 @@ public class Board extends Screens {
         this.answer = wordList.randomWord();
     }
 
-
-
-
-
     // getters
     public int getHeight() {
         return rowCount;
@@ -71,6 +67,11 @@ public class Board extends Screens {
     }
 
     public void guess(String str) {
+
+        if (str.length() == 5 && !wordList.containsWord(str)) {
+            System.out.println(Screens.GREEN + str + Screens.RED
+                    + " is not in the dictionary.  Please try again" + Screens.RESET);
+        }
 
         if (str.length() == 5 && str.chars().allMatch(Character::isLetter)) {
 
