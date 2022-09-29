@@ -1,7 +1,6 @@
 package com.retroarcade.wordle.app;
 
 import com.apps.util.Console;
-import com.apps.util.Prompter;
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
 import static com.retroarcade.wordle.Display.*;
@@ -15,7 +14,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Scanner;
-import java.util.Timer;
 
 public class WordleApp {
     // statics
@@ -28,7 +26,6 @@ public class WordleApp {
     // initalize board and scanner for user input
     private final Board board = new Board("resources/words.txt", 6);
     private Scanner input = new Scanner(System.in);
-    Prompter prompter = new Prompter(new Scanner(System.in));
 
     public WordleApp() throws IOException {
     }
@@ -41,7 +38,6 @@ public class WordleApp {
         showAnswer();
         recordGame(board);
         gameResult();
-        //showStats();
         exitGame();
     }
 
@@ -153,34 +149,6 @@ public class WordleApp {
         Console.blankLines(1);
     }
 
-    /* TODO
-
-    private void showStats() throws IOException {
-        Scanner reader = new Scanner(new File(HISTORY_PATH));
-        String gamesPlayed = reader.nextLine();
-        String gamesWon = reader.nextLine();
-        String winningWord = "";
-        while (reader.hasNextLine()) {
-            winningWord += reader.nextLine() + '\n';
-        }
-        reader.close();
-
-        int numGamesPlayed = Integer.parseInt(gamesPlayed
-                .substring(gamesPlayed.indexOf(": ") + 2).trim()) + 1;
-        int numGamesWon = Integer.parseInt(gamesWon
-                .substring(gamesWon.indexOf(": ") + 2).trim());
-
-        if (board.hasWon()) {
-            numGamesWon += 1;
-            winningWord += board.getAnswer();
-        }
-
-        Files.writeString(Path.of(HISTORY_PATH),
-                String.format("GamesPlayed: %d\nGamesWon: %d\n%s"
-                        , numGamesPlayed, numGamesWon, winningWord));
-    }
-     */
-
     private void exitGame() {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
         ZoneId pst = ZoneId.of("America/Los_Angeles") ;
@@ -212,3 +180,31 @@ public class WordleApp {
         System.exit(0);
     }
 }
+
+/* TODO - showStats()
+
+    private void showStats() throws IOException {
+        Scanner reader = new Scanner(new File(HISTORY_PATH));
+        String gamesPlayed = reader.nextLine();
+        String gamesWon = reader.nextLine();
+        String winningWord = "";
+        while (reader.hasNextLine()) {
+            winningWord += reader.nextLine() + '\n';
+        }
+        reader.close();
+
+        int numGamesPlayed = Integer.parseInt(gamesPlayed
+                .substring(gamesPlayed.indexOf(": ") + 2).trim()) + 1;
+        int numGamesWon = Integer.parseInt(gamesWon
+                .substring(gamesWon.indexOf(": ") + 2).trim());
+
+        if (board.hasWon()) {
+            numGamesWon += 1;
+            winningWord += board.getAnswer();
+        }
+
+        Files.writeString(Path.of(HISTORY_PATH),
+                String.format("GamesPlayed: %d\nGamesWon: %d\n%s"
+                        , numGamesPlayed, numGamesWon, winningWord));
+    }
+     */
