@@ -17,8 +17,8 @@ public class Screens {
     public static final String YELLOW = "\u001B[33m";
     public static final String CYAN = "\u001B[36m";
     public static final String RESET = "\u001B[0m";
-    public static final String BLACK = "\u001B[30m";
     public static final String WHITE = "\u001B[37m";
+    public static final String BLACK = "\u001B[30m";
 
     public static String instructTitle;
     public static String instructHeader;
@@ -61,7 +61,7 @@ public class Screens {
 
     public static void chooseScreen() {
         Scanner scan = new Scanner(System.in);
-        System.out.println(CYAN + "Hit any key or type [p] to play, " + PURPLE + "or hit [i] to see the instructions..." + RESET);
+        System.out.println(CYAN + "Hit enter or type [p] to play, " + PURPLE + "or hit [i] to see the instructions..." + RESET);
 
         String menu = scan.nextLine();
 

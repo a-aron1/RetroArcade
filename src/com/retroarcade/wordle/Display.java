@@ -39,7 +39,7 @@ public class Display {
         Console.blankLines(2);
         for (int i = 0; i < board.getHeight(); i++) {
             if (i < board.countGuesses()) {
-                Display.printComparison(board.numGuess(i), board.getAnswer(), " | ");
+                Display.printCompare(board.numGuess(i), board.getAnswer(), " | ");
             }
             else {
                 paddedPrint("  | ".repeat(board.getWidth() - 1));
@@ -65,12 +65,12 @@ public class Display {
     }
 
     // print helpers
-    private static void printComparison(String toPrint, String toCompare, String limit) {
+    private static void printCompare(String toPrint, String toCompare, String limit) {
         String output = "";
-        for (int n = 0; n < toPrint.length(); n++) {
-            char numChar = toPrint.charAt(n);
+        for (int i = 0; i < toPrint.length(); i++) {
+            char numChar = toPrint.charAt(i);
 
-            if (n < toCompare.length() && numChar == toCompare.charAt(n)) {
+            if (i < toCompare.length() && numChar == toCompare.charAt(i)) {
                 output += highlightText(Character.toString(numChar), Color.FG_BLACK_BG_GREEN);
             }
             else if (toCompare.contains(String.valueOf(numChar))) {
@@ -80,7 +80,7 @@ public class Display {
                 output += numChar;
             }
 
-            if (n != toPrint.length() - 1) {
+            if (i != toPrint.length() - 1) {
                 output += limit;
             }
         }
