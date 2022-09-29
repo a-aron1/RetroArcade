@@ -4,8 +4,6 @@ import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.retroarcade.wordle.Board;
 import com.retroarcade.wordle.Display;
-import com.retroarcade.wordle.Screens;
-
 import static com.retroarcade.wordle.Display.*;
 import static com.retroarcade.wordle.Screens.*;
 import java.io.IOException;
@@ -17,36 +15,35 @@ import java.util.Timer;
 
 public class WordleApp {
     // statics
-    private final static boolean DEBUG_MODE = true; // displays the answer for testing purposes
-    private final static String HISTORY_PATH = "data/history.txt"; // path to the history file
+    private final static boolean DEBUG_MODE = false; // displays the answer for testing purposes
+    private final static String HISTORY_PATH = "data/history.txt";
     private final static Timer TIMER = new Timer();
 
     // fields
     private long startTime = System.currentTimeMillis();
 
-    // initalize the WordleBoard and Scanner for user input.
+    // initalize board and scanner for user input
     private final Board board = new Board("resources/words.txt", 6);
-    private Scanner input = new Scanner(System.in); // reads console input
+    private Scanner input = new Scanner(System.in);
     Prompter prompter = new Prompter(new Scanner(System.in));
 
     public WordleApp() throws IOException {
     }
 
     public void execute() throws Exception {
-        // menuTimer();
-        welcome(); // chooseScreen();
-        playGame();  // runGame();
+        welcome();
+        playGame();
         clearBoard();
         updateBoard();
         showAnswer();
         recordGame(board);
         gameResult();
-        //showStats();  // goodbye();
+        //showStats();
+        exitGame();
     }
 
     private void welcome() throws IOException {
         startScreen();
-        //playGame();
     }
 
     private void playGame() {
@@ -79,12 +76,7 @@ public class WordleApp {
         printAnswer(board.getAnswer());
     }
 
-    /*
-     * WordleBoard - Takes a board to record game results
-     * The gamesPlayed counter at the HISTORY_PATH increments
-     * If won, gamesWon increments and the winning word is recorded
-     */
-    private void recordGame(Board board) throws Exception {
+    private void recordGame(Board board) throws IOException {
         Scanner reader = new Scanner(new File(HISTORY_PATH));
         String gamesPlayed = reader.nextLine();
         String gamesWon = reader.nextLine();
@@ -110,26 +102,92 @@ public class WordleApp {
     }
 
     private void gameResult() {
+        if (board.hasWon()) {
+            gameWon();
+        }
+        else {
+            gameLost();
+        }
+    }
+
+    private void gameWon() {
         int tries = board.countGuesses();
         long endTime = System.currentTimeMillis();
         String numTries = (tries < 2) ? " try!\n" : " tries!\n";
 
+        System.out.println(GREEN + winBanner + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+        System.out.println(YELLOW + "Nice work!" + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+        System.out.println(CYAN + "You found the answer in " + ((endTime - startTime) / 1000) + "seconds." + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+        System.out.println(YELLOW + "And in just " + tries + numTries + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+        System.out.println(RED + "SERIOUSLY IMPRESSIVE!" + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+    }
+
+    private void gameLost() {
+        long endTime = System.currentTimeMillis();
+
+        Console.blankLines(1);
+        System.out.println(RED + lostBanner + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+        System.out.println(RED + "Now that was quick...  :(" + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+        System.out.println(CYAN + "You lost in " + ((endTime - startTime) / 1000) + " seconds." + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+        System.out.println(YELLOW + "Better luck next time!" + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+    }
+
+    /* TODO
+
+    private void showStats() throws IOException {
+        Scanner reader = new Scanner(new File(HISTORY_PATH));
+        String gamesPlayed = reader.nextLine();
+        String gamesWon = reader.nextLine();
+        String winningWord = "";
+        while (reader.hasNextLine()) {
+            winningWord += reader.nextLine() + '\n';
+        }
+        reader.close();
+
+        int numGamesPlayed = Integer.parseInt(gamesPlayed
+                .substring(gamesPlayed.indexOf(": ") + 2).trim()) + 1;
+        int numGamesWon = Integer.parseInt(gamesWon
+                .substring(gamesWon.indexOf(": ") + 2).trim());
+
         if (board.hasWon()) {
-            System.out.println(GREEN + winBanner);
-            System.out.println("\nNice work!\nYou found the answer in "
-                    + ((endTime - startTime) / 1000)
-                    + " seconds...\nAnd in just "
-                    + tries + numTries + "Impressive!\n");
-            System.out.println(RESET);
-            System.out.println(CYAN + "Start preparing now:  The next Wordle comes out at midnight!");
+            numGamesWon += 1;
+            winningWord += board.getAnswer();
+        }
+
+        Files.writeString(Path.of(HISTORY_PATH),
+                String.format("GamesPlayed: %d\nGamesWon: %d\n%s"
+                        , numGamesPlayed, numGamesWon, winningWord));
+    }
+     */
+
+    private void exitGame() {
+        System.out.println(PURPLE + "Start preparing now:  The next Wordle comes out at midnight!" + RESET);
+        Console.pause(1000);
+        Console.blankLines(1);
+
+        if (board.hasWon()) {
+            System.out.println(GREEN + "Hope to see you tomorrow!");
         }
         else {
-            System.out.println(RED + lostBanner + RESET);
-            System.out.println(CYAN + "\nYou lost in "
-                    + ((endTime - startTime) / 1000)
-                    + " seconds.  \n  \nBetter luck next time!\n");
-            System.out.println(RESET);
-            System.out.println(BLUE + "Start preparing now:  The next Wordle comes out at midnight!");
+            System.out.println(GREEN + "Chin up -- Hope to see you tomorrow!");
         }
         System.exit(0);
     }

@@ -1,5 +1,5 @@
-GamesPlayed: 38
-GamesWon: 23
+GamesPlayed: 53
+GamesWon: 29
 YOJAN
 LAMDA
 CMSGT
@@ -23,3 +23,9 @@ CABIN
 NONAN
 REEKS
 PESKY
+OARED
+TIFTS
+SNOEP
+APPTS
+BALUN
+TADAH

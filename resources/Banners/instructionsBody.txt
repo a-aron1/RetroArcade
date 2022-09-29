@@ -1,0 +1,19 @@
+
+          .-'-.                     Game play is simple and easy:
+        /`     |__
+      /`  _.--`-,-`                 - Guess the Wordle in 6 tries or less
+      '-|`   a '<-.   []
+        \     _\__) \=`             - Each guess must be a valid 5-letter word in our word list
+         C_  `    ,_/
+           | ;----'                 - Be sure to hit the enter button to submit your guess
+      _.---| |--._
+    .'  _./' '\._ '.                - After each guess, if your word contains one or more
+   /--'`  `-.-`  `'-\                 letters in the answer, the letter will change colors:
+  |         o        \
+  |__ .             / )               GREEN 🟩 means the letter is in the correct spot
+ (___)|     o     \/ /
+  | | |           |-'\     .--.       YELLOW 🟨 means the letter is in the word, but wrong spot
+ /  |_.-"""-.-'=_ |   '--./ = .`
+<   `  =-->    _= /        __/        GREY 🟨 means the letter is not in the word -- try again!
+ '._     _.-"-.= /`"-...-"`
+    `;"""`     __/                  And there is a new Wordle puzzler each day.  Have fun!

@@ -7,22 +7,24 @@
 ▄████▄████  ████▄██████▀ ▀████████▄    ▀████▀███▄█████▀  ▀████████▄ ▀█████▀▄████  ████▄██████▀
 
 
+                         WELCOME TO THE EXCITING AND FUN WORLD OF WORDLE!
 
-          .-'-.                 GUESS THE WORDLE IN 6 TRIES.
-        /`     |__              EACH GUESS MUST BE A VALID 5-LETTER WORD.
-      /`  _.--`-,-`             HIT THE ENTER BUTTON TO SUBMIT.
-      '-|`   a '<-.   []        AFTER EACH GUESS, THE COLOR OF THE BOX CHANGE
-        \     _\__) \=`         TO SHOW HOW CLOSE YOUR GUESS WAS TO THE WORD.
+
+          .-'-.                     Game play is simple and easy:
+        /`     |__
+      /`  _.--`-,-`                 - Guess the Wordle in 6 tries or less
+      '-|`   a '<-.   []
+        \     _\__) \=`             - Each guess must be a valid 5-letter word in our word list
          C_  `    ,_/
-           | ;----'             EXAMPLES:
-      _.---| |--._              GREEN 🟩 BOX MEANS THE LETTER IS IN THE CORRECT SPOT.
-    .'  _./' '\._ '.
-   /--'`  `-.-`  `'-\           YELLOW 🟨 BOX MEANS THE LETTER IN IN THE WORD BUT IN THE WRONG SPOT.
+           | ;----'                 - Be sure to hit the enter button to submit your guess
+      _.---| |--._
+    .'  _./' '\._ '.                - After each guess, if your word contains one or more
+   /--'`  `-.-`  `'-\                 letters in the answer, the letter will change colors:
   |         o        \
-  |__ .             / )         GREY 🟨 BOX MEANS THE LETTER DOESN'T EXISTS IN ANY SPOT.
+  |__ .             / )               GREEN 🟩 means the letter is in the correct spot
  (___)|     o     \/ /
-  | | |           |-'\     .--.
- /  |_.-"""-.-'=_ |   '--./ = .`     A NEW WORLDLE IS AVAILABLE EACH DAY!
-<   `  =-->    _= /        __/
+  | | |           |-'\     .--.       YELLOW 🟨 means the letter is in the word, but wrong spot
+ /  |_.-"""-.-'=_ |   '--./ = .`
+<   `  =-->    _= /        __/        GREY 🟨 means the letter is not in the word -- try again!
  '._     _.-"-.= /`"-...-"`
-    `;"""`     __/
+    `;"""`     __/                  And there is a new Wordle puzzler each day.  Have fun!
