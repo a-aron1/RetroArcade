@@ -3,7 +3,6 @@ package com.retroarcade.wordle;
 import com.apps.util.Console;
 
 public class Display {
-//    private static String title = "";
     private static String leftPadding = " ";
 
     private enum Color {
@@ -36,18 +35,8 @@ public class Display {
         }
     }
 
-    // setters
-//    public static void setTitle(String str) {
-//        title = str;
-//    }
-//
-//    public static void setLeftPadding(String str) {
-//        leftPadding = str;
-//    }
-
-    // methods
     public static void render(Board board) {
-        Console.blankLines(1);
+        Console.blankLines(2);
         for (int i = 0; i < board.getHeight(); i++) {
             if (i < board.countGuesses()) {
                 Display.printComparison(board.numGuess(i), board.getAnswer(), " | ");
