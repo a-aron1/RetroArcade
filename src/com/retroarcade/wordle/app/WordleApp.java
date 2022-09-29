@@ -19,9 +19,8 @@ import java.util.Timer;
 
 public class WordleApp {
     // statics
-    private final static boolean DEBUG_MODE = false; // displays the answer for testing purposes
+    private final static boolean DEBUG_MODE = true; // displays the answer for testing purposes
     private final static String HISTORY_PATH = "data/history.txt";
-    private final static Timer TIMER = new Timer();
 
     // fields
     private long startTime = System.currentTimeMillis();
@@ -125,7 +124,7 @@ public class WordleApp {
         System.out.println(YELLOW + "Nice work!" + RESET);
         Console.pause(1000);
         Console.blankLines(1);
-        System.out.println(CYAN + "You found the answer in " + ((endTime - startTime) / 1000) + "seconds." + RESET);
+        System.out.println(CYAN + "You found the answer in " + ((endTime - startTime) / 1000) + " seconds." + RESET);
         Console.pause(1000);
         Console.blankLines(1);
         System.out.println(YELLOW + "And in just " + tries + numTries + RESET);
@@ -184,24 +183,31 @@ public class WordleApp {
 
     private void exitGame() {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
-        ZoneId z = ZoneId.of( "America/Los_Angeles" ) ;
-        ZonedDateTime timeNow = ZonedDateTime.now( z ) ;  // today's time in CST zone
+        ZoneId pst = ZoneId.of("America/Los_Angeles") ;
+        ZonedDateTime timeNow = ZonedDateTime.now(pst) ; // today's time in CST zone
         LocalDate timeTomorrow = now.toLocalDate().plusDays( 1 ) ;
-        ZonedDateTime tomorrowStart = timeTomorrow.atStartOfDay( z ) ;  // tomorrow at midnight
-        Duration timeDifference = Duration.between( now.toInstant() , tomorrowStart.toInstant() ) ;   // gets the time difference
+        ZonedDateTime tomorrowStart = timeTomorrow.atStartOfDay(pst) ; // tomorrow at midnight
+        Duration timeDifference = Duration.between(now.toInstant(), tomorrowStart.toInstant()); // gets the time difference
 
-        //this reformates/parses the Duration into more readable format
-        String timeToNextWordle = String.format(" %d Hours : %02d Minutes: %02d Seconds ", timeDifference.getSeconds() / 3600, (timeDifference.getSeconds() % 3600) / 60, (timeDifference.getSeconds() % 60));
+        // reformats/parses the Duration into more readable format
+        String timeToNextWordle = String.format(" %d Hours : %02d Minutes: %02d Seconds "
+                , timeDifference.getSeconds() / 3600
+                , (timeDifference.getSeconds() % 3600) / 60
+                , (timeDifference.getSeconds() % 60));
 
-//        System.out.println(PURPLE PURPLE+ "Start preparing now:  The next Wordle comes out at midnight!" + RESET);
+        //System.out.println(PURPLE PURPLE+ "Start preparing now:  The next Wordle comes out at midnight!" + RESET);
         Console.pause(1000);
         Console.blankLines(1);
 
         if (board.hasWon()) {
-            System.out.println(GREEN + "Hope to see you tomorrow! New Wordle in " + PURPLE+timeToNextWordle);
+            System.out.println(GREEN + "A new Wordle comes out in "
+                    + PURPLE + timeToNextWordle
+                    + GREEN + "- Hope to see you tomorrow!");
         }
         else {
-            System.out.println(GREEN + "Chin up -- New Worlde comes out in " + PURPLE+timeToNextWordle);
+            System.out.println(GREEN + "Chin up -- A new Worlde comes out in "
+                    + PURPLE + timeToNextWordle
+                    + GREEN + "- Hope to see you tomorrow!");
         }
         System.exit(0);
     }

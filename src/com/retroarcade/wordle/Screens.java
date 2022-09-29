@@ -53,9 +53,9 @@ public class Screens {
         String welcome = Files.readString(Path.of("resources/Banners/welcome.txt"));
         String worlde = Files.readString(Path.of("resources/Banners/welcomeBanner.txt"));
 
-        System.out.print(GREEN + welcome);
+        System.out.print(GREEN + welcome + RESET);
         Console.pause(1000);
-        System.out.print(YELLOW + worlde);
+        System.out.print(YELLOW + worlde + RESET);
         Console.blankLines(2);
     }
 
@@ -90,7 +90,7 @@ public class Screens {
         Console.pause(1000);
         Console.blankLines(2);
         System.out.println(GREEN + instructBody + RESET);
-        Console.pause(15000);
+        Console.pause(7700);
         Console.blankLines(2);
         System.out.println(PURPLE + "Hope that helped.  Now let's play!" + RESET);
         Console.blankLines(2);

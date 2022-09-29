@@ -29,7 +29,11 @@ public class WordCheck {
     }
 
     public boolean containsWord(String word) {
-        return words.contains(word);
+        if (words.contains(word)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String randomWord() {
