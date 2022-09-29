@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Scanner;
 import java.util.Timer;
 
@@ -179,15 +183,25 @@ public class WordleApp {
      */
 
     private void exitGame() {
-        System.out.println(PURPLE + "Start preparing now:  The next Wordle comes out at midnight!" + RESET);
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
+        ZoneId z = ZoneId.of( "America/Los_Angeles" ) ;
+        ZonedDateTime timeNow = ZonedDateTime.now( z ) ;  // today's time in CST zone
+        LocalDate timeTomorrow = now.toLocalDate().plusDays( 1 ) ;
+        ZonedDateTime tomorrowStart = timeTomorrow.atStartOfDay( z ) ;  // tomorrow at midnight
+        Duration timeDifference = Duration.between( now.toInstant() , tomorrowStart.toInstant() ) ;   // gets the time difference
+
+        //this reformates/parses the Duration into more readable format
+        String timeToNextWordle = String.format(" %d Hours : %02d Minutes: %02d Seconds ", timeDifference.getSeconds() / 3600, (timeDifference.getSeconds() % 3600) / 60, (timeDifference.getSeconds() % 60));
+
+//        System.out.println(PURPLE PURPLE+ "Start preparing now:  The next Wordle comes out at midnight!" + RESET);
         Console.pause(1000);
         Console.blankLines(1);
 
         if (board.hasWon()) {
-            System.out.println(GREEN + "Hope to see you tomorrow!");
+            System.out.println(GREEN + "Hope to see you tomorrow! New Wordle in " + PURPLE+timeToNextWordle);
         }
         else {
-            System.out.println(GREEN + "Chin up -- Hope to see you tomorrow!");
+            System.out.println(GREEN + "Chin up -- New Worlde comes out in " + PURPLE+timeToNextWordle);
         }
         System.exit(0);
     }
