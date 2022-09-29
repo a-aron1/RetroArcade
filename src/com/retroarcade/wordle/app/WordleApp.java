@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class WordleApp {
     // statics
-    private final static boolean DEBUG_MODE = true; // displays the answer for testing purposes
+    private final static boolean DEBUG_MODE = false; // displays the answer for testing purposes
     private final static String HISTORY_PATH = "data/history.txt";
 
     // fields
